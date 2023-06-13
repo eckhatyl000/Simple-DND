@@ -1,123 +1,39 @@
-const fs = require('fs');
-const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
-const port = 3000;
 
+// Parse JSON bodies for this app. Make sure you put this line before your routes!
+app.use(bodyParser.json());
 
-// Middleware for parsing JSON request bodies
-app.use(express.json());
+let userData = [];  // A list to store user data.
 
-app.use(express.static(path.join(__dirname, '..', 'Public')));
-
-// Routes
-const loginRoutes = require('./routes/loginRoutes');
-const dashboardRoutes = require('./routes/dashboardRoutes');
-const authRoutes = require('./routes/authRoutes');
-const otherRoutes = require('./routes/otherRoutes');
-const createAccountRoutes = require('./routes/createAccountRoutes');
-
-
-
-app.use('/login', loginRoutes);
-app.use('/dashboard', dashboardRoutes);
-app.use('/auth', authRoutes);
-app.use('/other', otherRoutes);
-app.use('/create-account', createAccountRoutes);
-
-// Create a route for creating a new character
-app.post('/api/characters', (req, res) => {
-    // Logic to create a new character
-    const newCharacter = req.body;
-    // Save the new character to the database
-    // ...
-    // Send a response indicating success or failure
-    res.json({ message: 'Character created successfully' });
+// A route for registering a new user.
+app.post('/register', (req, res) => {
+    const user = req.body; // Get user data from the request body.
+    userData.push(user); // Push the user data to our list.
+    res.json({ message: 'User registered successfully' });
 });
 
-// Create a route for retrieving character details
-app.get('/api/characters/:id', (req, res) => {
-    // Logic to retrieve character details
-    const characterId = req.params.id;
-    // Retrieve character details from the database
-    // ...
-    // Send the character details in the response
-    res.json({ character: { id: characterId, name: 'John Doe', class: 'Warrior' } });
+// A route for retrieving all users.
+app.get('/users', (req, res) => {
+    res.json(userData);
 });
 
-// Create a route for updating character information
-app.put('/api/characters/:id', (req, res) => {
-    // Logic to update character information
-    const characterId = req.params.id;
-    const updatedData = req.body;
-    // Update the character in the database
-    // ...
-    // Send a response indicating success or failure
-    res.json({ message: 'Character updated successfully' });
-});
+// A route for logging in a user.
+app.post('/login', (req, res) => {
+    const { username, password } = req.body; // Get username and password from the request body.
 
-// Create a route for deleting a character
-app.delete('/api/characters/:id', (req, res) => {
-    // Logic to delete a character
-    const characterId = req.params.id;
-    // Delete the character from the database
-    // ...
-    // Send a response indicating success or failure
-    res.json({ message: 'Character deleted successfully' });
-});
+    // Find the user in our list.
+    const user = userData.find(u => u.username === username && u.password === password);
 
-// Serve the landing page
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'Login', 'login.html'));
-});
-
-
-// after all your other route definitions
-app.get('*', function (req, res) {
-    res.redirect('/');
-});
-
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
-
-const { MongoClient } = require('mongodb');
-
-// Connection URL
-const url = 'mongodb://Eckhatyl000:TeeGee%231@tylerdb.cknlngax0gto.us-west-2.docdb.amazonaws.com:27017/?retryWrites=false';
-const ca = fs.readFileSync('/home/ec2-user/files/us-west-2-bundle.pem');
-
-const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    tls: true,
-    tlsInsecure: false,
-    tlsCAFile: ca,
-};
-
-
-// Connect to the Amazon DocumentDB cluster
-async function connectToDatabase() {
-    try {
-        const client = new MongoClient(url, options);
-        await client.connect();
-        console.log('Connected to the database');
-
-        // Perform database operations
-        const db = client.db('tylerdb'); 
-        // ...
-
-        // Close the client connection
-        client.close();
-    } catch (err) {
-        console.error('Error connecting to the database:', err);
+    if (user) { // If the user is found and the password matches
+        res.json({ message: 'Logged in successfully' });
+    } else { // If the user is not found or the password does not match
+        res.json({ message: 'Invalid username or password' });
     }
-}
+});
 
-// Call the connectToDatabase function to establish the connection
-connectToDatabase();
-
+app.listen(3000, () => console.log('Server started on port 3000.'));
 
 

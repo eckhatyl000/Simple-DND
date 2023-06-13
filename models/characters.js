@@ -13,10 +13,10 @@ const characterSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 1
-    },
-    
+    }
 });
 
 const Character = mongoose.model('Character', characterSchema);
 
 module.exports = Character;
+
