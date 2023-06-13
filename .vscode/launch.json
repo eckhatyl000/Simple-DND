@@ -1,6 +1,40 @@
 {
     "configurations": [
         {
+            "name": "Docker .NET Attach (Preview)",
+            "type": "docker",
+            "request": "attach",
+            "platform": "netCore",
+            "sourceFileMap": {
+                "/src": "${workspaceFolder}"
+            }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Invoke Lambda with API Gateway",
+            "invokeTarget": {
+                "target": "api",
+                "templatePath": "Template Location",
+                "logicalId": "Function Logical ID"
+            },
+            "api": {
+                "path": "Path",
+                "httpMethod": "put",
+                "payload": {
+                    "json": {}
+                }
+            }
+        },
+        {
+            "name": "Attach to Edge",
+            "port": 9222,
+            "request": "attach",
+            "type": "msedge",
+            "webRoot": "${workspaceFolder}"
+        },
+
+        {
             "type": "aws-sam",
             "request": "direct-invoke",
             "name": "lambda-nodejs12.x:HelloWorldFunction (nodejs12.x)",
