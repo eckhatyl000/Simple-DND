@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.sendFile('login.html');
+    res.sendFile('login.html', { root: 'public' });
 });
 
 router.post('/', (req, res) => {
-    // TODO: Perform authentication here
+    
     const { username, password } = req.body;
 
     if (username === 'admin' && password === 'password') {
@@ -17,6 +17,7 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
