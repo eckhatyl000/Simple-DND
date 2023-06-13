@@ -1,17 +1,14 @@
 document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
-    
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    
     const userData = {
         username: username,
         password: password
     };
 
-    
     fetch('/login', {
         method: 'POST',
         headers: {
@@ -21,8 +18,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     })
         .then(response => response.json())
         .then(data => {
-            
-            if (data.message === 'Logged in successfully') {
+            if (data.message === 'User logged in successfully') {
                 window.location.href = '../Dashboard/dashboard.html';
             } else {
                 alert('Error: ' + data.message);
@@ -33,9 +29,9 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         });
 });
 
-
 document.getElementById('createAccountLink').addEventListener('click', function (event) {
     event.preventDefault();
     window.location.href = 'create account/create-account.html';
 });
+
 
