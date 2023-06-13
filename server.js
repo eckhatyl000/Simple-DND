@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const loginRoute = require('./routes/loginRoutes');
 const creatAccountRoute = require('./routes/createAccountRoutes');
-const dashboardRoute = require('./routes/dashboardRoutes');
 const authRoute = require('./routes/authRoutes');
 const characterRoute = require('./routes/characterRoutes');
 
@@ -19,7 +18,6 @@ app.use(bodyParser.json());
 
 app.use('/', loginRoute);
 app.use('/', creatAccountRoute);
-app.use('/', dashboardRoute);
 app.use('/', authRoute);
 app.use('/', characterRoute);
 
