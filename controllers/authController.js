@@ -1,4 +1,4 @@
-let users = []; // This is an in-memory store and will be wiped out when server restarts
+let users = []; 
 
 const registerUser = (req, res) => {
     const { username, password } = req.body;
