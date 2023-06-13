@@ -3,37 +3,68 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Parse JSON bodies for this app. Make sure you put this line before your routes!
+
+let users = [];
+
+let characters = [];
+
+
 app.use(bodyParser.json());
 
-let userData = [];  // A list to store user data.
 
-// A route for registering a new user.
 app.post('/register', (req, res) => {
-    const user = req.body; // Get user data from the request body.
-    userData.push(user); // Push the user data to our list.
-    res.json({ message: 'User registered successfully' });
+    const { username, password } = req.body;
+    
+    const userExists = users.some(user => user.username === username);
+    if (userExists) {
+        return res.status(400).json({ error: 'Username already exists' });
+    }
+
+    
+    const newUser = { id: users.length + 1, username, password };
+    users.push(newUser);
+
+    res.status(201).json(newUser);
 });
 
-// A route for retrieving all users.
-app.get('/users', (req, res) => {
-    res.json(userData);
-});
 
-// A route for logging in a user.
 app.post('/login', (req, res) => {
-    const { username, password } = req.body; // Get username and password from the request body.
+    const { username, password } = req.body;
+    const user = users.find(user => user.username === username && user.password === password);
 
-    // Find the user in our list.
-    const user = userData.find(u => u.username === username && u.password === password);
+    if (user) {
+        res.json({ message: 'Login successful', userId: user.id });
+    } else {
+        res.status(401).json({ message: 'Invalid username or password' });
+    }
+});
 
-    if (user) { // If the user is found and the password matches
-        res.json({ message: 'Logged in successfully' });
-    } else { // If the user is not found or the password does not match
-        res.json({ message: 'Invalid username or password' });
+
+app.post('/characters', (req, res) => {
+    const character = req.body;
+    character.id = characters.length + 1;  
+    characters.push(character);
+    res.status(201).json(character);
+});
+
+
+app.get('/characters', (req, res) => {
+    res.json(characters);
+});
+
+
+app.get('/characters/:id', (req, res) => {
+    const { id } = req.params;
+    const character = characters.find(character => character.id === parseInt(id));
+
+    if (character) {
+        res.json(character);
+    } else {
+        res.status(404).json({ message: 'Character not found' });
     }
 });
 
 app.listen(3000, () => console.log('Server started on port 3000.'));
+
 
 

@@ -1,34 +1,30 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user');
+let users = []; // This is an in-memory store and will be wiped out when server restarts
 
-router.post('/', async (req, res) => {
-    try {
-        const { username, password } = req.body;
+const registerUser = (req, res) => {
+    const { username, password } = req.body;
+    const existingUser = users.find(u => u.username === username);
 
-        const isValid = await isValidCredentials(username, password);
-        if (!isValid) {
-            return res.status(401).json({ message: 'Invalid username or password' });
-        }
-
-        // Create a new user
-        const user = new User({ username, password });
-        await user.save();
-
-        res.json({ message: 'Account created successfully' });
-    } catch (error) {
-        console.error('Error creating account:', error);
-        res.status(500).json({ message: 'Error creating account' });
-    }
-});
-
-async function isValidCredentials(username, password) {
-    const existingUser = await User.findOne({ username });
-    if (!existingUser) {
-        return false;
+    if (existingUser) {
+        return res.status(400).json({ error: 'Username already exists' });
     }
 
-    return password === existingUser.password;
-}
+    users.push({ username, password });
+    res.status(201).json({ message: 'User registered successfully' });
+};
 
-module.exports = router;
+const loginUser = (req, res) => {
+    const { username, password } = req.body;
+    const user = users.find(u => u.username === username);
+
+    if (!user || user.password !== password) {
+        return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    res.json({ message: 'User logged in successfully' });
+};
+
+module.exports = {
+    registerUser,
+    loginUser,
+};
+

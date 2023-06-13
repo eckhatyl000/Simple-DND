@@ -1,22 +1,17 @@
-const mongoose = require('mongoose');
-
-const characterSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
+let characters = [
+    {
+        id: 1,
+        name: 'Gandalf',
+        class: 'Wizard',
+        level: 20
     },
-    class: {
-        type: String,
-        required: true
+    {
+        id: 2,
+        name: 'Aragorn',
+        class: 'Ranger',
+        level: 20
     },
-    level: {
-        type: Number,
-        required: true,
-        default: 1
-    }
-});
+    
+];
 
-const Character = mongoose.model('Character', characterSchema);
-
-module.exports = Character;
 
