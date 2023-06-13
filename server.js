@@ -1,11 +1,12 @@
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const loginRoute = require('./routes/loginRoutes');
 const creatAccountRoute = require('./routes/createAccountRoutes');
 const dashboardRoute = require('./routes/dashboardRoutes');
 const authRoute = require('./routes/authRoutes')
 
-const app = express();
+
 
 
 let users = [];
