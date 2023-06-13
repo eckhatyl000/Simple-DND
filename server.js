@@ -23,7 +23,7 @@ app.post('/login', loginUser);
 app.post('/characters', createCharacter);
 app.get('/characters/:id', getCharacterById);
 
-app.listen(3000, () => console.log('Server started on port 3000.'));
+app.listen(8080, () => console.log('Server started on port 3000.'));
 
 
 
