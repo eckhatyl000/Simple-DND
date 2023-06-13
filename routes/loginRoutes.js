@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    res.sendFile('login.html', { root: 'Login' });
+    res.sendFile('../public/Login/login.html', { root: __dirname + '/../' });
 });
 
 router.post('/', (req, res) => {
