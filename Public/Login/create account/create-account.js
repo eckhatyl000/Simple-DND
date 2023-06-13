@@ -20,7 +20,7 @@ document.getElementById('createAccountForm').addEventListener('submit', function
 
     
     fetch('/register', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -43,6 +43,6 @@ document.getElementById('createAccountForm').addEventListener('submit', function
 
 document.getElementById('loginForm').addEventListener('click', function (event) {
     event.preventDefault();
-    window.location.href = './login.html';
+    window.location.href = '../login.html';
 });
 

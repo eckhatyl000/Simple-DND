@@ -16,9 +16,9 @@ app.use('/', creatAccountRoute);
 app.use('/', authRoute);
 app.use('/', characterRoute);
 
-app.post('/register', registerUser);
-app.post('/login', loginUser);
-app.post('/characters', createCharacter);
+app.put('/register', registerUser);
+app.put('/login', loginUser);
+app.put('/characters', createCharacter);
 app.get('/characters/:id', getCharacterById);
 
 app.listen(8080, () => console.log('Server started on port 8080.'));

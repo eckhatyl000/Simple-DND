@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const createCharacter = async (characterData) => {
     try {
-        const response = await axios.post('/api/characters', characterData);
+        const response = await axios.put('/api/characters', characterData);
         console.log(response.data); // Process the response data
     } catch (error) {
         console.error(error); // Handle errors

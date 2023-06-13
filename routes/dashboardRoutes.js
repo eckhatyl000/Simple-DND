@@ -1,5 +1,5 @@
 const path = require('path');
-const characters = require('../data/characters'); // Assuming you have a file containing character data
+const characters = require('../Character-sheets/character-sheet.html'); 
 
 exports.dashboard = (req, res) => {
     try {
