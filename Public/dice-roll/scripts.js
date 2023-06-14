@@ -3,10 +3,10 @@ function rollDice() {
     const diceAmount = document.getElementById('diceAmount').value;
     const outputContainer = document.getElementById('diceOutput');
 
-    // Clear previous results
+    
     outputContainer.innerHTML = '';
 
-    // Validate input values
+    
     if (diceType === '' || diceAmount === '') {
         displayError('Please select a dice type and enter the amount.');
         return;
@@ -23,7 +23,7 @@ function rollDice() {
         return;
     }
 
-    // Perform dice roll calculations
+    
     let total = 0;
     let rolls = [];
 
@@ -33,7 +33,7 @@ function rollDice() {
         total += roll;
     }
 
-    // Update the output container with the result
+    
     const resultHTML = document.createElement('div');
     resultHTML.innerHTML = `
     <p>Rolling ${diceAmount} ${diceType}(s)...</p>
