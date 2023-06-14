@@ -23,6 +23,11 @@ app.put('/login', loginUser);
 app.put('/characters', createCharacter);
 app.get('/characters/:id', getCharacterById);
 
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/Public/Login/login.html');
+});
+
 app.listen(8080, () => console.log('Server started on port 8080.'));
 
 
