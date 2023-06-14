@@ -3,37 +3,37 @@ import axios from 'axios';
 const createCharacter = async (characterData) => {
     try {
         const response = await axios.put('/api/characters', characterData);
-        console.log(response.data); // Process the response data
+        console.log(response.data); 
     } catch (error) {
-        console.error(error); // Handle errors
+        console.error(error); 
     }
 };
 
 const getCharacterDetails = async (characterId) => {
     try {
         const response = await axios.get(`/api/characters/${characterId}`);
-        console.log(response.data); // Process the response data
+        console.log(response.data); 
     } catch (error) {
-        console.error(error); // Handle errors
+        console.error(error); 
     }
 };
 
 const updateCharacter = async (characterId, updatedData) => {
     try {
         const response = await axios.put(`/api/characters/${characterId}`, updatedData);
-        console.log(response.data); // Process the response data
+        console.log(response.data); 
     } catch (error) {
-        console.error(error); // Handle errors
+        console.error(error); 
     }
 };
 
 const saveCharacter = async (characterId, characterData) => {
     try {
         const response = await axios.put(`/api/characters/${characterId}`, characterData);
-        console.log(response.data); // Process the response data
+        console.log(response.data); 
         console.log('Character saved successfully');
     } catch (error) {
-        console.error(error); // Handle errors
+        console.error(error); 
     }
 };
 
@@ -41,17 +41,16 @@ const saveCharacter = async (characterId, characterData) => {
 const deleteCharacter = async (characterId) => {
     try {
         const response = await axios.delete(`/api/characters/${characterId}`);
-        console.log(response.data); // Process the response data
+        console.log(response.data); 
     } catch (error) {
-        console.error(error); // Handle errors
+        console.error(error); 
     }
 };
 
 window.addEventListener('DOMContentLoaded', async function () {
     const characterSheet = document.getElementById('characterSheet');
 
-    // Check if there is character data available
-    // If not, display "CREATE A NEW character" message
+    
     const urlParams = new URLSearchParams(window.location.search);
     const characterId = urlParams.get('id');
 
@@ -60,7 +59,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     } else {
         try {
             const response = await getCharacterDetails(characterId);
-            // Display character sheet content dynamically
+            
             characterSheet.innerHTML = `
         <h2>${response.data.characterName}</h2>
         <ul>
@@ -71,7 +70,7 @@ window.addEventListener('DOMContentLoaded', async function () {
         </ul>
       `;
         } catch (error) {
-            console.error(error); // Handle errors
+            console.error(error); 
         }
     }
 });

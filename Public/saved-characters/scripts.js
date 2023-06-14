@@ -5,9 +5,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Dummy data for saved characters
     const savedCharacters = [
-        { id: 1, name: 'Character 1' },
-        { id: 2, name: 'Character 2' },
-        { id: 3, name: 'Character 3' }
+        { id: 1, name: 'Your cool character' },
+        { id: 2, name: 'Other' },
+        { id: 3, name: 'Other' }
     ];
 
     // Clear the existing character list

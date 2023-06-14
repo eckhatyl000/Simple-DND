@@ -8,9 +8,9 @@ function saveNotes() {
             throw new Error('Character notes cannot be empty');
         }
 
-        // Make a POST request to the server to save character notes
+        
         fetch('/api/characters/notes', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
