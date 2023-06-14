@@ -12,6 +12,8 @@ let characters = [];
 
 app.use(bodyParser.json());
 
+app.use('/', express.static('public'));
+
 app.use('/', creatAccountRoute);
 app.use('/', authRoute);
 app.use('/', characterRoute);
