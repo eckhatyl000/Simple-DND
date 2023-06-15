@@ -48,6 +48,11 @@ function displayError(message) {
     const errorContainer = document.getElementById('errorContainer');
     errorContainer.textContent = message;
 };
+
+function goToCharacterSheet() {
+    window.location.href = 'character-sheet.html';
+};
+
 document.getElementById('logoutButton').addEventListener('click', function () {
    
     window.location.href = '../login.html';
