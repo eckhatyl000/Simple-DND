@@ -48,7 +48,6 @@ const deleteCharacter = async (characterId) => {
 window.addEventListener('DOMContentLoaded', async function () {
     const characterSheet = document.getElementById('characterSheet');
 
-    
     const urlParams = new URLSearchParams(window.location.search);
     const characterId = urlParams.get('id');
 
@@ -56,8 +55,15 @@ window.addEventListener('DOMContentLoaded', async function () {
         characterSheet.innerHTML = 'CREATE A NEW character';
     } else {
         try {
-            const response = await getCharacterDetails(characterId);
-            
+            let response;
+            if (characterId === 'new') {
+                
+                response = { data: { characterName: 'New Character' } };
+            } else {
+                
+                response = await getCharacterDetails(characterId);
+            }
+
             characterSheet.innerHTML = `
         <h2>${response.data.characterName}</h2>
         <ul>
@@ -68,8 +74,19 @@ window.addEventListener('DOMContentLoaded', async function () {
         </ul>
       `;
         } catch (error) {
-            console.error(error); 
+            console.error(error);
         }
     }
 });
+
+async function getCharacterDetails(characterId) {
+    
+    const response = await fetch(`/api/characters/${characterId}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch character details');
+    }
+    const data = await response.json();
+    return data;
+}
+
 
