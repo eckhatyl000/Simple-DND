@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use('/', express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/path/to/login.html');
+    res.sendFile(__dirname + '/Public/Login/login.html');
 });
 
 app.use('/', creatAccountRoute);
