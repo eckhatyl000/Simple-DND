@@ -13,12 +13,12 @@ let characters = [];
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname));
-app.use(express.static('Public/Login'));
-app.use(express.static('Public/Login/create-account'));
-app.use(express.static('Public/Dashboard'));
-app.use(express.static('Public/character-notes'));
-app.use(express.static('Public/saved-characters'));
-app.use(express.static('Public/account-page'));
+app.use(express.static('Simple-DND/Public/Login'));
+app.use(express.static('Simple-DND/Public/Login/create-account'));
+app.use(express.static('Simple-DND/Public/Dashboard'));
+app.use(express.static('Simple-DND/Public/character-notes'));
+app.use(express.static('Simple-DND/Public/saved-characters'));
+app.use(express.static('Simple-DND/Public/account-page'));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/Public/Login/login.html');
