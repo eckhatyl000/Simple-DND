@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 const createCharacter = async (characterData) => {
     try {
         const response = await axios.put('/api/characters', characterData);
