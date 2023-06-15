@@ -50,7 +50,7 @@ function displayError(message) {
 };
 
 function goToCharacterSheet() {
-    window.location.href = 'character-sheet.html';
+    window.location.href = '/Public/Character-sheets/character-sheet.html';
 };
 
 document.getElementById('logoutButton').addEventListener('click', function () {
