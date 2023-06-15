@@ -12,7 +12,7 @@ let characters = [];
 
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname));
+app.use(express.static('Simple-DND'));
 app.use(express.static('Simple-DND/Public/Login'));
 app.use(express.static('Simple-DND/Public/Login/create-account'));
 app.use(express.static('Simple-DND/Public/Dashboard'));
