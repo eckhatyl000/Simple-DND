@@ -31,7 +31,7 @@ document.getElementById('createAccountForm').addEventListener('submit', function
             console.log(data);
             
             if (data.id) {
-                window.location.href = 'Public/Login/login.html';
+                window.location.href = '../../login.html';
             } else {
                 alert('Error: ' + data.error);
             }
@@ -43,6 +43,6 @@ document.getElementById('createAccountForm').addEventListener('submit', function
 
 document.getElementById('loginForm').addEventListener('click', function (event) {
     event.preventDefault();
-    window.location.href = 'Public/Login/login.html';
+    window.location.href = '../../login.html';
 });
 
