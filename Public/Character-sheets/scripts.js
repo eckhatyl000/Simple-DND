@@ -79,14 +79,6 @@ window.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
-async function getCharacterDetails(characterId) {
-    
-    const response = await fetch(`/api/characters/${characterId}`);
-    if (!response.ok) {
-        throw new Error('Failed to fetch character details');
-    }
-    const data = await response.json();
-    return data;
-}
+
 
 
