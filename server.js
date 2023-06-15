@@ -6,7 +6,7 @@ const creatAccountRoute = require('./routes/createAccountRoutes');
 const authRoute = require('./routes/authRoutes');
 const characterRoute = require('./routes/characterRoutes');
 const { registerUser, loginUser } = require('./controllers/authController');
-const { createCharacter, getCharacterById } = require('./controllers/characterController');
+
 
 let users = [];
 let characters = [];
