@@ -19,7 +19,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         .then(response => response.json())
         .then(data => {
             if (data.message === 'User logged in successfully') {
-                window.location.href = '../Dashboard/dashboard.html';
+                window.location.href = 'Public/Dashboard/dashboard.html';
             } else {
                 alert('Error: ' + data.message);
             }
