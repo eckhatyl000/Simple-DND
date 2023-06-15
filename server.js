@@ -31,8 +31,39 @@ app.use('/', characterRoute);
 
 app.put('/register', registerUser);
 app.put('/login', loginUser);
-app.put('/characters', createCharacter);
-app.get('/characters/:id', getCharacterById);
+
+app.put('/characters', async (req, res) => {
+    try {
+        const response = await axios.put('/api/characters', req.body);
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error creating character');
+    }
+});
+
+
+app.get('/characters/:id', async (req, res) => {
+    const characterId = req.params.id;
+    try {
+        const response = await axios.get(`/api/characters/${characterId}`);
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching character details');
+    }
+});
+
+app.delete('/characters/:id', async (req, res) => {
+    const characterId = req.params.id;
+    try {
+        const response = await axios.delete(`/api/characters/${characterId}`);
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error deleting character');
+    }
+});
 
 
 

@@ -9,7 +9,7 @@ function saveNotes() {
         }
 
         
-        fetch('/api/characters/notes', {
+        fetch('/api/characters/${characterID}', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
