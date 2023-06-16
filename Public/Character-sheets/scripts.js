@@ -103,88 +103,100 @@ function getCharacterData() {
 function displayCharacter(character) {
     const characterSheet = document.getElementById('characterSheet');
     characterSheet.innerHTML = `
-        <h2>${character.name}</h2>
-        <ul>
-            <li>Class: ${character.characterClass}</li>
-            <li>Level: ${character.level}</li>
-            <!-- Add more character details as needed -->
-        </ul>
-    `;
-        console.log(character);
-};
-
-
+    <h2>${character.name}</h2>
+    <ul>
+      <li>Name: ${character.characterName}</li>
+      <li>Class: ${character.characterClass}</li>
+      <li>Level: ${character.level}</li>
+    </ul>
+  `;
+    console.log(character);
+}
 
 window.addEventListener('DOMContentLoaded', async function () {
     const characterSheet = document.getElementById('characterSheet');
-    const urlParams = new URLSearchParams(window.location.search);
-    const characterId = urlParams.get('id');
-
     const createButton = document.getElementById('create-character');
-    const updateButton = document.getElementById('update-character');
-    const saveButton = document.getElementById('save-character');
-    const deleteButton = document.getElementById('delete-character');
+    const form = document.querySelector('form');
+    const characterList = document.getElementById('characterList');
+    const characterSelect = document.getElementById('character-select');
+    const viewButton = document.getElementById('view-character');
 
-    createButton.addEventListener('click', function () {
-        const characterData = getCharacterData();
-        createCharacter(characterData);
-    });
+    const populateCharacterOptions = (characters) => {
+        characterSelect.innerHTML = '<option value="">-- Select a character --</option>';
+        characters.forEach((character, index) => {
+            const option = document.createElement('option');
+            option.value = index.toString();
+            option.textContent = character.name;
+            characterSelect.appendChild(option);
+        });
+    };
 
-    updateButton.addEventListener('click', function () {
-        const characterData = getCharacterData();
-        updateCharacter(characterId, characterData);
-    });
+    const handleViewCharacter = async () => {
+        const selectedIndex = characterSelect.selectedIndex;
+        if (selectedIndex === 0) {
+            return;
+        }
 
-    saveButton.addEventListener('click', function () {
-        const characterData = getCharacterData();
-        saveCharacter(characterId, characterData);
-    });
-
-    deleteButton.addEventListener('click', function () {
-        deleteCharacter(characterId);
-    });
-
-    if (!characterId) {
-        characterSheet.innerHTML = 'CREATE A NEW character';
-    } else {
         try {
-            let response;
-            if (characterId === 'new') {
-                response = { data: { characterName: 'New Character' } };
-            } else {
-                response = await getCharacterDetails(characterId);
-            }
-
-            characterSheet.innerHTML = `
-        <h2>${response.data.characterName}</h2>
-        <ul>
-          <li>Race: ${response.data.race}</li>
-          <li>Class: ${response.data.characterClass}</li>
-          <li>Level: ${response.data.level}</li>
-          <!-- Add more character details as needed -->
-        </ul>
-      `;
+            const response = await fetch('/characters');
+            const characters = await response.json();
+            const selectedCharacter = characters[selectedIndex - 1]; 
+            displayCharacter(selectedCharacter);
         } catch (error) {
             console.error(error);
         }
-    }
-});
+    };
 
+    viewButton.addEventListener('click', handleViewCharacter);
 
+    createButton.addEventListener('click', async function (event) {
+        event.preventDefault();
+        const characterData = getCharacterData();
+        await createCharacter(characterData);
+        form.reset();
+        await fetchCharactersAndDisplayLatest();
+    });
 
-window.addEventListener('DOMContentLoaded', async function () {
     try {
-        
+        await fetchCharactersAndDisplayLatest();
         const response = await fetch('/characters');
-        const data = await response.json();
-        console.log(data);
-
-        
-        data.forEach(character => {
-            displayCharacter(character);
-        });
+        const characters = await response.json();
+        populateCharacterOptions(characters);
     } catch (error) {
         console.error(error);
     }
 });
 
+async function fetchCharactersAndDisplayLatest() {
+    const characterSheet = document.getElementById('characterSheet');
+    const characterList = document.getElementById('characterList');
+
+    try {
+        const response = await fetch('/characters');
+        const data = await response.json();
+
+        if (data.length === 0) {
+            characterSheet.innerHTML = 'No characters found';
+        } else {
+            const latestCharacter = data[data.length - 1];
+            characterSheet.innerHTML = `
+                <h2>${latestCharacter.name}</h2>
+                <ul>
+                    <li>Class: ${latestCharacter.characterClass}</li>
+                    <li>Level: ${latestCharacter.level}</li>
+                    <li>Name: ${latestCharacter.name}</li>
+                </ul>
+            `;
+        }
+
+        characterList.innerHTML = '';
+
+        data.forEach(character => {
+            const characterItem = document.createElement('div');
+            characterItem.textContent = character.name;
+            characterList.appendChild(characterItem);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}

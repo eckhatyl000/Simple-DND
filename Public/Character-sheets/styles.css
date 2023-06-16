@@ -22,3 +22,24 @@ pre {
 code {
     font-family: Consolas, Monaco, "Courier New", monospace;
 }
+
+.character-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.character-form-container #characterList {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.character-form-container .character-item {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-weight: bold;
+}

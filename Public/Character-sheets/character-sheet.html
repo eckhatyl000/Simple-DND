@@ -24,10 +24,19 @@
 
     <div class="character-form-container">
         <h1>Character Form</h1>
-        
-        <div id="characterList"></div>
-
-
+    
+        <div class="character-list">
+            <div id="characterList"></div>
+        </div>
+    
+        <div>
+            <label for="character-select">Select Character:</label>
+            <select id="character-select">
+                <option value="">-- Select a character --</option>
+            </select>
+            <button id="view-character">View Character</button>
+        </div>
+    
         <form action="/characters" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
