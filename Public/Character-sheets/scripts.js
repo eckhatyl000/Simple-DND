@@ -101,8 +101,16 @@ function getCharacterData() {
     return characterData;
 };
 function displayCharacter(character) {
-    // Replace this with your own implementation to display the character information
-    console.log(character);
+    const characterSheet = document.getElementById('characterSheet');
+    characterSheet.innerHTML = `
+        <h2>${character.name}</h2>
+        <ul>
+            <li>Class: ${character.characterClass}</li>
+            <li>Level: ${character.level}</li>
+            <!-- Add more character details as needed -->
+        </ul>
+    `;
+        console.log(character);
 };
 
 
