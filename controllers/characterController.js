@@ -1,4 +1,4 @@
-const { characters } = require('../server'); 
+const { characters } = require('../server.js'); 
 
 const createCharacter = (req, res) => {
     const newCharacter = req.body;

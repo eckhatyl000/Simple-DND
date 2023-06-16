@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { characters } = require('../server');
+const { characters } = require('../server.js');
 
 
 router.put('/characters/:id', (req, res) => {
