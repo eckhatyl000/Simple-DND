@@ -69,6 +69,7 @@ const saveCharacter = async (characterId, characterData) => {
 
 
 
+
 const deleteCharacter = async (characterId) => {
     try {
         const response = await fetch(`/characters/${characterId}`, {
@@ -84,6 +85,7 @@ const deleteCharacter = async (characterId) => {
         console.error(error);
     }
 };
+
 
 
 
