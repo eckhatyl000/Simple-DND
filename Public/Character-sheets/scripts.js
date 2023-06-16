@@ -164,6 +164,15 @@ window.addEventListener('DOMContentLoaded', async function () {
         const response = await fetch('/characters');
         const characters = await response.json();
         populateCharacterOptions(characters);
+
+        characterList.addEventListener('click', async (event) => {
+            if (event.target.classList.contains('delete-button')) {
+                const characterId = event.target.dataset.characterId;
+                await deleteCharacter(characterId);
+                await fetchCharactersAndDisplayLatest();
+            }
+        });
+        
     } catch (error) {
         console.error(error);
     }
@@ -201,4 +210,6 @@ async function fetchCharactersAndDisplayLatest() {
     } catch (error) {
         console.error(error);
     }
-}
+};
+
+
