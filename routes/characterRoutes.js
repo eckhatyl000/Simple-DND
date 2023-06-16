@@ -21,14 +21,17 @@ router.put('/characters/:id', (req, res) => {
 router.post('/characters', (req, res) => {
     const characterData = req.body;
     const characters = req.app.get('characters');
-    const existingCharacter = characters.find(c => c.name === characterData.name);
+    const character = characters.find(c =>
+        c.name === characterData.name &&
+        c.characterClass === characterData.characterClass &&
+        c.level === characterData.level
+    );
 
-    if (existingCharacter) {
-        return res.status(400).json({ error: 'Character name already exists' });
+    if (!character) {
+        return res.status(404).send('Character not found');
     }
 
-    characters.push(characterData);
-    res.status(201).json({ message: 'Character created successfully' });
+    res.json(character);
 });
 
 router.get('/characters', (req, res) => {
