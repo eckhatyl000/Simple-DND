@@ -11,6 +11,7 @@ let users = [];
 let characters = [];
 
 app.use(bodyParser.json());
+app.use('/', router);
 
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + 'Simple-DND/Public/Login'));
