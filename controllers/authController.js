@@ -1,4 +1,4 @@
-const { users } = require('..server/');
+const { users } = require('../server');
 
 const registerUser = (req, res) => {
     const { username, password } = req.body;
