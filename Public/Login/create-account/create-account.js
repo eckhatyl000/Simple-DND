@@ -20,7 +20,7 @@ document.getElementById('createAccountForm').addEventListener('submit', function
 
     
     fetch('/register', {
-        method: 'PUT',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },

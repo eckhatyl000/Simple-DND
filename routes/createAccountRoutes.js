@@ -3,7 +3,7 @@ const router = express.Router();
 
 let users = {};
 
-router.put('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { username, password } = req.body;
 

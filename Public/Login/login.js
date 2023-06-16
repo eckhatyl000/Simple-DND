@@ -10,7 +10,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     };
 
     fetch('/login', {
-        method: 'PUT',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
