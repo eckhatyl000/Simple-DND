@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-
-
-router.put('/characters/:id', (req, res, characters) => {
+router.put('/characters/:id', (req, res) => {
     const characterId = req.params.id;
     const characterData = req.body;
+    const characters = req.app.get('characters');
 
     const index = characters.findIndex(c => c.id === characterId);
 
@@ -19,8 +18,9 @@ router.put('/characters/:id', (req, res, characters) => {
     res.json({ message: 'Character updated successfully', character: updatedCharacter });
 });
 
-router.post('/characters', (req, res, characters) => {
+router.post('/characters', (req, res) => {
     const characterData = req.body;
+    const characters = req.app.get('characters');
     const existingCharacter = characters.find(c => c.name === characterData.name);
 
     if (existingCharacter) {
@@ -31,8 +31,9 @@ router.post('/characters', (req, res, characters) => {
     res.status(201).json({ message: 'Character created successfully' });
 });
 
-router.get('/characters/:id', (req, res, characters) => {
+router.get('/characters/:id', (req, res) => {
     const characterId = req.params.id;
+    const characters = req.app.get('characters');
     const character = characters.find(c => c.id === characterId);
 
     if (!character) {
@@ -42,8 +43,9 @@ router.get('/characters/:id', (req, res, characters) => {
     res.json(character);
 });
 
-router.delete('/characters/:id', (req, res, characters) => {
+router.delete('/characters/:id', (req, res) => {
     const characterId = req.params.id;
+    const characters = req.app.get('characters');
     const index = characters.findIndex(c => c.id === characterId);
 
     if (index === -1) {

@@ -11,7 +11,8 @@ let users = [];
 let characters = [];
 
 app.use(bodyParser.json());
-app.use('/', router);
+app.set('users', users);
+app.set('characters', characters);
 
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + 'Simple-DND/Public/Login'));
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/Public/Login/login.html');
 });
 
-app.use('/', creatAccountRoute(users));
+app.use('/', creatAccountRoute);
 app.use('/', authRoute);
 app.use('/', characterRoute);
 

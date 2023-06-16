@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-
-
-router.post('/', async (req, res, users) => {
+router.post('/', (req, res) => {
     try {
         const { username, password } = req.body;
+        const users = req.app.get('users');
 
         if (users[username]) {
             return res.status(400).json({ message: 'Username already taken' });
@@ -21,6 +20,7 @@ router.post('/', async (req, res, users) => {
 });
 
 module.exports = router;
+
 
 
 

@@ -1,5 +1,6 @@
-const registerUser = (req, res, users) => {
+const registerUser = (req, res) => {
     const { username, password } = req.body;
+    const users = req.app.get('users');
     const existingUser = users.find(u => u.username === username);
 
     if (existingUser) {
@@ -10,8 +11,9 @@ const registerUser = (req, res, users) => {
     res.status(201).json({ message: 'User registered successfully' });
 };
 
-const loginUser = (req, res, users) => {
+const loginUser = (req, res) => {
     const { username, password } = req.body;
+    const users = req.app.get('users');
     const user = users.find(u => u.username === username);
 
     if (!user || user.password !== password) {
@@ -25,4 +27,5 @@ module.exports = {
     registerUser,
     loginUser,
 };
+
 
