@@ -10,15 +10,18 @@ const createCharacter = async (characterData) => {
         const data = await response.json();
         console.log(data);
 
+        const createdCharacter = data.character;
+        const characterId = createdCharacter.id;
+
         
-        displayCharacter(data.character);
+        getCharacterDetails(characterId);
     } catch (error) {
         console.error(error);
     }
 };
 
 
-const getCharacterDetails = async (characterId) => {
+const getCharacterDetails = async (character) => {
     try {
         const response = await fetch(`/characters/${characterId}`);
         const data = await response.json();
@@ -53,13 +56,17 @@ const saveCharacter = async (characterId, characterData) => {
             },
             body: JSON.stringify(characterData)
         });
-        const data = await response.json();
-        console.log(data);
-        console.log('Character saved successfully');
+
+        if (response.ok) {
+            console.log('Character saved successfully');
+        } else {
+            console.error('Failed to save character');
+        }
     } catch (error) {
         console.error(error);
     }
 };
+
 
 
 const deleteCharacter = async (characterId) => {
@@ -67,12 +74,18 @@ const deleteCharacter = async (characterId) => {
         const response = await fetch(`/characters/${characterId}`, {
             method: 'DELETE',
         });
-        const data = await response.json();
-        console.log(data);
+
+        if (response.ok) {
+            console.log('Character deleted successfully');
+        } else {
+            console.error('Failed to delete character');
+        }
     } catch (error) {
         console.error(error);
     }
 };
+
+
 
 function getCharacterData() {
     const nameInput = document.getElementById('name');
@@ -146,5 +159,19 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 
 
+window.addEventListener('DOMContentLoaded', async function () {
+    try {
+        
+        const response = await fetch('/characters');
+        const data = await response.json();
+        console.log(data);
 
+        
+        data.forEach(character => {
+            displayCharacter(character);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+});
 
