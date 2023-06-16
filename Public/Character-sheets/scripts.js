@@ -105,8 +105,8 @@ function displayCharacter(character) {
     characterSheet.innerHTML = `
     <h2>${character.name}</h2>
     <ul>
-      <li>Name: ${character.characterName}</li>
-      <li>Class: ${character.characterClass}</li>
+      <li>Name: ${character.Name}</li>
+      <li>Class: ${character.Class}</li>
       <li>Level: ${character.level}</li>
     </ul>
   `;
