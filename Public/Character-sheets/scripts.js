@@ -70,6 +70,21 @@ const deleteCharacter = async (characterId) => {
     }
 };
 
+function getCharacterData() {
+    const nameInput = document.getElementById('name');
+    const classInput = document.getElementById('class');
+    const levelInput = document.getElementById('level');
+
+    const characterData = {
+        name: nameInput.value,
+        characterClass: classInput.value,
+        level: parseInt(levelInput.value)
+    };
+
+    return characterData;
+}
+
+
 window.addEventListener('DOMContentLoaded', async function () {
     const characterSheet = document.getElementById('characterSheet');
     const urlParams = new URLSearchParams(window.location.search);

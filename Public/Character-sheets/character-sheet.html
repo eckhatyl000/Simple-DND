@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Sheet</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
 </head>
 
 <body>
@@ -21,9 +22,22 @@
         <button id="delete-character">Delete Character</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <div class="character-form-container">
+        <h1>Character Form</h1>
 
-    <script src="scripts.js"></script>
+        <form action="/characters" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="class">Class:</label>
+            <input type="text" id="class" name="class" required>
+            <br>
+            <label for="level">Level:</label>
+            <input type="number" id="level" name="level" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 
 </html>
