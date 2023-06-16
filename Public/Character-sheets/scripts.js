@@ -99,7 +99,12 @@ function getCharacterData() {
     };
 
     return characterData;
-}
+};
+function displayCharacter(character) {
+    // Replace this with your own implementation to display the character information
+    console.log(character);
+};
+
 
 
 window.addEventListener('DOMContentLoaded', async function () {

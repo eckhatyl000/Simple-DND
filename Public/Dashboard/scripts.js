@@ -52,6 +52,18 @@ function displayError(message) {
 function goToCharacterSheet() {
     window.location.href = '/Public/Character-sheets/character-sheet.html';
 };
+function displayCharacter(character) {
+    const characterSheet = document.getElementById('characterSheet');
+    characterSheet.innerHTML = `
+        <h2>${character.name}</h2>
+        <ul>
+            <li>Class: ${character.characterClass}</li>
+            <li>Level: ${character.level}</li>
+            <!-- Add more character details as needed -->
+        </ul>
+    `;
+};
+
 
 document.getElementById('logoutButton').addEventListener('click', function () {
    
