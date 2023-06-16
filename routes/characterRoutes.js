@@ -31,6 +31,11 @@ router.post('/characters', (req, res) => {
     res.status(201).json({ message: 'Character created successfully' });
 });
 
+router.get('/characters', (req, res) => {
+    const characters = req.app.get('characters');
+    res.json(characters);
+});
+
 router.get('/characters/:id', (req, res) => {
     const characterId = req.params.id;
     const characters = req.app.get('characters');
@@ -42,6 +47,7 @@ router.get('/characters/:id', (req, res) => {
 
     res.json(character);
 });
+
 
 router.delete('/characters/:id', (req, res) => {
     const characterId = req.params.id;

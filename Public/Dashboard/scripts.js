@@ -57,4 +57,19 @@ document.getElementById('logoutButton').addEventListener('click', function () {
    
     window.location.href = '../login.html';
 });
+window.addEventListener('DOMContentLoaded', async function () {
+    try {
+        
+        const response = await fetch('/characters');
+        const data = await response.json();
+        console.log(data);
+
+        
+        data.forEach(character => {
+            displayCharacter(character);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+});
 
