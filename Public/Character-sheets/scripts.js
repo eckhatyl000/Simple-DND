@@ -31,21 +31,23 @@ const getCharacterDetails = async (character) => {
     }
 };
 
-const updateCharacter = async (characterId, updatedData) => {
+const updateCharacter = async (character, updatedData) => {
     try {
-        const response = await fetch(`/characters/${characterId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedData)
-        });
-        const data = await response.json();
-        console.log(data);
+        
+        const index = characters.findIndex(c => c === character);
+
+        if (index !== -1) {
+            
+            Object.assign(character, updatedData);
+            console.log('Character updated successfully');
+        } else {
+            console.error('Character not found');
+        }
     } catch (error) {
         console.error(error);
     }
 };
+
 
 const saveCharacter = async (characterId, characterData) => {
     try {
@@ -70,22 +72,22 @@ const saveCharacter = async (characterId, characterData) => {
 
 
 
-const deleteCharacter = async (characterId) => {
+const deleteCharacter = async (character) => {
     try {
-        const response = await fetch(`/characters/${characterId}`, {
-            method: 'DELETE',
-        });
+        
+        const index = characters.findIndex(c => c === character);
 
-        if (response.ok) {
+        if (index !== -1) {
+            
+            characters.splice(index, 1);
             console.log('Character deleted successfully');
         } else {
-            console.error('Failed to delete character');
+            console.error('Character not found');
         }
     } catch (error) {
         console.error(error);
     }
 };
-
 
 
 
