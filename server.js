@@ -37,5 +37,5 @@ app.post('/login', loginUser);
 
 app.listen(8080, () => console.log('Server started on port 8080.'));
 
-
+module.exports = { users, characters };
 

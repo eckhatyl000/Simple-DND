@@ -3,9 +3,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     
     const savedCharacters = [
-        { id: 1, name: 'Your cool character' },
-        { id: 2, name: 'Other' },
-        { id: 3, name: 'Other' }
+        { id: 1, name: '' },
+        { id: 2, name: '' },
+        { id: 3, name: '' }
     ];
 
     

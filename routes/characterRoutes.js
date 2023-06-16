@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { characters } = require('./path_to_your_server.js_file');
 
-let characters = [];
 
 router.put('/characters/:id', (req, res) => {
     const characterId = req.params.id;
