@@ -63,6 +63,40 @@ function displayCharacter(character) {
     `;
 };
 
+async function fetchCharactersAndDisplayLatest() {
+    const characterSheet = document.getElementById('characterSheet');
+    const characterList = document.getElementById('characterList');
+
+    try {
+        const response = await fetch('/characters');
+        const data = await response.json();
+
+        if (data.length === 0) {
+            characterSheet.innerHTML = 'No characters found';
+        } else {
+            const latestCharacter = data[data.length - 1];
+            characterSheet.innerHTML = `
+                <h2>${latestCharacter.name}</h2>
+                <ul>
+                    <li>Class: ${latestCharacter.characterClass}</li>
+                    <li>Level: ${latestCharacter.level}</li>
+                    <li>Name: ${latestCharacter.name}</li>
+                </ul>
+            `;
+        }
+
+        characterList.innerHTML = '';
+
+        data.forEach(character => {
+            const characterItem = document.createElement('div');
+            characterItem.textContent = character.name;
+            characterList.appendChild(characterItem);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 
 document.getElementById('logoutButton').addEventListener('click', function () {
    
