@@ -11,25 +11,22 @@ const createCharacter = async (characterData) => {
         console.log(data);
 
         const createdCharacter = data.character;
-        const characterId = createdCharacter.id;
-
-        
-        getCharacterDetails(characterId);
+        getCharacterDetails(createdCharacter);
     } catch (error) {
         console.error(error);
     }
 };
+
 
 
 const getCharacterDetails = async (character) => {
     try {
-        const response = await fetch(`/characters/${characterId}`);
-        const data = await response.json();
-        console.log(data);
+        console.log(character);
     } catch (error) {
         console.error(error);
     }
 };
+
 
 const updateCharacter = async (character, updatedData) => {
     try {
@@ -49,9 +46,9 @@ const updateCharacter = async (character, updatedData) => {
 };
 
 
-const saveCharacter = async (characterId, characterData) => {
+const saveCharacter = async (characterData) => {
     try {
-        const response = await fetch(`/characters/${characterId}`, {
+        const response = await fetch('/characters', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -68,7 +65,6 @@ const saveCharacter = async (characterId, characterData) => {
         console.error(error);
     }
 };
-
 
 
 
@@ -169,18 +165,20 @@ window.addEventListener('DOMContentLoaded', async function () {
 
         characterList.addEventListener('click', async (event) => {
             if (event.target.classList.contains('delete-character')) {
-                const characterId = event.target.dataset.characterId;
-                await deleteCharacter(characterId);
+                const character = event.target.closest('.character');
+                await deleteCharacter(character);
                 await fetchCharactersAndDisplayLatest();
             }
         });
+
         characterList.addEventListener('click', async (event) => {
             if (event.target.classList.contains('update-character')) {
-                const characterId = event.target.dataset.characterId;
-                await updateCharacter(characterId);
+                const character = event.target.closest('.character');
+                await updateCharacter(character);
                 await fetchCharactersAndDisplayLatest();
             }
         });
+
 
     } catch (error) {
         console.error(error);
