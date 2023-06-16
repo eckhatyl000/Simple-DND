@@ -9,10 +9,14 @@ const createCharacter = async (characterData) => {
         });
         const data = await response.json();
         console.log(data);
+
+        
+        displayCharacter(data.character);
     } catch (error) {
         console.error(error);
     }
 };
+
 
 const getCharacterDetails = async (characterId) => {
     try {
