@@ -1,6 +1,4 @@
-const { users } = require('../server.js');
-
-const registerUser = (req, res) => {
+const registerUser = (req, res, users) => {
     const { username, password } = req.body;
     const existingUser = users.find(u => u.username === username);
 
@@ -12,7 +10,7 @@ const registerUser = (req, res) => {
     res.status(201).json({ message: 'User registered successfully' });
 };
 
-const loginUser = (req, res) => {
+const loginUser = (req, res, users) => {
     const { username, password } = req.body;
     const user = users.find(u => u.username === username);
 

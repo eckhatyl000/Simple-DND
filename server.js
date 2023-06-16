@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/Public/Login/login.html');
 });
 
-app.use('/', creatAccountRoute);
+app.use('/', creatAccountRoute(users));
 app.use('/', authRoute);
 app.use('/', characterRoute);
 

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { characters } = require('../server.js');
 
 
-router.put('/characters/:id', (req, res) => {
+
+router.put('/characters/:id', (req, res, characters) => {
     const characterId = req.params.id;
     const characterData = req.body;
 
@@ -19,7 +19,7 @@ router.put('/characters/:id', (req, res) => {
     res.json({ message: 'Character updated successfully', character: updatedCharacter });
 });
 
-router.post('/characters', (req, res) => {
+router.post('/characters', (req, res, characters) => {
     const characterData = req.body;
     const existingCharacter = characters.find(c => c.name === characterData.name);
 
@@ -31,7 +31,7 @@ router.post('/characters', (req, res) => {
     res.status(201).json({ message: 'Character created successfully' });
 });
 
-router.get('/characters/:id', (req, res) => {
+router.get('/characters/:id', (req, res, characters) => {
     const characterId = req.params.id;
     const character = characters.find(c => c.id === characterId);
 
@@ -42,7 +42,7 @@ router.get('/characters/:id', (req, res) => {
     res.json(character);
 });
 
-router.delete('/characters/:id', (req, res) => {
+router.delete('/characters/:id', (req, res, characters) => {
     const characterId = req.params.id;
     const index = characters.findIndex(c => c.id === characterId);
 
