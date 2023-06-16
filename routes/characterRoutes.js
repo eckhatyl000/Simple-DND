@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 router.put('/characters/:id', (req, res) => {
-    const characterId = req.params.id;
     const characterData = req.body;
     const characters = req.app.get('characters');
 
-    const index = characters.findIndex(c => c.id === characterId);
+    const index = characters.findIndex(c =>
+        c.name === characterData.name &&
+        c.characterClass === characterData.characterClass &&
+        c.level === characterData.level
+    );
 
     if (index === -1) {
         return res.status(404).send('Character not found');
@@ -19,6 +22,19 @@ router.put('/characters/:id', (req, res) => {
 });
 
 router.post('/characters', (req, res) => {
+    const characterData = req.body;
+    const characters = req.app.get('characters');
+
+    characters.push(characterData);
+    res.status(201).json({ message: 'Character created successfully' });
+});
+
+router.get('/characters', (req, res) => {
+    const characters = req.app.get('characters');
+    res.json(characters);
+});
+
+router.get('/characters/:id', (req, res) => {
     const characterData = req.body;
     const characters = req.app.get('characters');
     const character = characters.find(c =>
@@ -34,28 +50,14 @@ router.post('/characters', (req, res) => {
     res.json(character);
 });
 
-router.get('/characters', (req, res) => {
-    const characters = req.app.get('characters');
-    res.json(characters);
-});
-
-router.get('/characters/:id', (req, res) => {
-    const characterId = req.params.id;
-    const characters = req.app.get('characters');
-    const character = characters.find(c => c.id === characterId);
-
-    if (!character) {
-        return res.status(404).send('Character not found');
-    }
-
-    res.json(character);
-});
-
-
 router.delete('/characters/:id', (req, res) => {
-    const characterId = req.params.id;
+    const characterData = req.body;
     const characters = req.app.get('characters');
-    const index = characters.findIndex(c => c.id === characterId);
+    const index = characters.findIndex(c =>
+        c.name === characterData.name &&
+        c.characterClass === characterData.characterClass &&
+        c.level === characterData.level
+    );
 
     if (index === -1) {
         return res.status(404).send('Character not found');
@@ -66,3 +68,4 @@ router.delete('/characters/:id', (req, res) => {
 });
 
 module.exports = router;
+
