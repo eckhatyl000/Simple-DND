@@ -166,13 +166,20 @@ window.addEventListener('DOMContentLoaded', async function () {
         populateCharacterOptions(characters);
 
         characterList.addEventListener('click', async (event) => {
-            if (event.target.classList.contains('delete-button')) {
+            if (event.target.classList.contains('delete-character')) {
                 const characterId = event.target.dataset.characterId;
                 await deleteCharacter(characterId);
                 await fetchCharactersAndDisplayLatest();
             }
         });
-        
+        characterList.addEventListener('click', async (event) => {
+            if (event.target.classList.contains('update-character')) {
+                const characterId = event.target.dataset.characterId;
+                await updateCharacter(characterId);
+                await fetchCharactersAndDisplayLatest();
+            }
+        });
+
     } catch (error) {
         console.error(error);
     }
