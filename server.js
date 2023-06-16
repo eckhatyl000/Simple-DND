@@ -19,10 +19,6 @@ app.use(express.static(__dirname + 'Simple-DND/Public/Dashboard'));
 app.use(express.static(__dirname + 'Simple-DND/Public/character-notes'));
 app.use(express.static(__dirname + 'Simple-DND/Public/saved-characters'));
 app.use(express.static(__dirname + 'Simple-DND/Public/account-page'));
-app.post('/characters', characterController.createCharacter);
-app.get('/characters/:id', characterController.getCharacterById);
-app.put('/characters/:id', characterController.saveCharacter);
-app.delete('/characters/:id', characterController.deleteCharacter);
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/Public/Login/login.html');
 });
